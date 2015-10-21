@@ -1,0 +1,20 @@
+language: android
+addons:
+  apt:
+    packages:
+      - bc
+      - zip
+      - curl
+env:
+  global: >
+    - TD_BUILD="../unity-ads/android/example/build/outputs/apk/example-debug.apk"
+    - TD_RUN_NAME="td-ssa-examples: Travis-test No.${TRAVIS_BUILD_NUMBER} $TRAVIS_BRANCH"
+    - TD_BASE_CMD_API_KEY='./testdroid_cmdline.sh -u $TD_API_TOKEN -t "$TD_PROJECT" -a "$TD_BUILD" -r "$TD_RUN_NAME" -z ../tests/'
+    - CMD_TD_RUN_EXAMPLE="$TD_BASE_CMD_API_KEY -d $TD_DEVICE_GROUP_ID"
+install:
+  - git clone https://github.com/Applifier/unity-ads unity-ads
+  - (cd unity-ads/android/example ; gradle build)
+  - git clone https://github.com/uJappelbe/testdroid-ssa-client
+script:
+  - (cd testdroid-ssa-client ; eval $CMD_TD_RUN_EXAMPLE)
+sudo: false
