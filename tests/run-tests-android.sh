@@ -7,7 +7,7 @@ function get_full_path {
 }
 
 # Setup Appium
-app_path='../application.apk'
+app_path='../unity-ads/android/example/build/outputs/apk/example-debug.apk'
 export APPIUM_APPFILE=${APPIUM_APPFILE:="$(get_full_path "$app_path")"}
 export APPIUM_DEVICE="Local Device"
 export APPIUM_PLATFORM="android"
@@ -49,8 +49,8 @@ if [ "$TESTDROID" -eq "1" ]; then
   npm install chai@2.1.2 colors underscore chai-as-promised wd path mkdirp yiewd tail mocha-junit-reporter mocha
   ./node_modules/.bin/mocha example.js --reporter mocha-junit-reporter --reporter-options mochaFile=./TEST-all.xml 2>&1
 else
-  npm install chai@2.1.2 colors underscore chai-as-promised wd path mkdirp yiewd tail mocha-junit-reporter
-  ./node_modules/.bin/mocha example.js --reporter mocha-junit-reporter --reporter-options mochaFile=./TEST-all.xml 2>&1
+  npm install chai@2.1.2 colors underscore chai-as-promised wd path mkdirp yiewd tail mocha-junit-reporter mocha
+  ./node_modules/.bin/mocha example.js
 fi
 
 

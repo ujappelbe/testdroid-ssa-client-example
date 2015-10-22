@@ -39,3 +39,26 @@ TD_BUILD="../unity-ads/android/example/build/outputs/apk/example-debug.apk"
 ./testdroid_cmdline.sh -u $TD_API_TOKEN -t "$TD_PROJECT" -a "$TD_BUILD" -r "My first SSA test" -z ../tests/ -d $TD_DEVICE_GROUP_ID
 ```
 ### Client should now start running test on testdroid cloud.
+
+
+## To run test locally (on emulator or real device)
+```
+git clone https://github.com/ujappelbe/testdroid-ssa-client-example.git
+cd testdroid-ssa-client-example/
+```
+
+### Clone the repository containing example test application
+```
+git clone https://github.com/Applifier/unity-ads unity-ads
+```
+
+### Build the test application (requires android SDK and gradle)
+```
+(cd unity-ads/android/example ; gradle build)
+```
+
+### Run the test
+```
+cd tests
+./run-tests-android.sh
+```
