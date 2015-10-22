@@ -64,3 +64,6 @@ Run the test
 cd tests
 ./run-tests-android.sh
 ```
+
+## Travis integration
+Check .travis.yml for travis integration.
