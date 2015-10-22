@@ -10,6 +10,15 @@ var
 var
   platform = process.env.APPIUM_PLATFORM;
 
+var waitByLinkOrName = function (text, timeout){
+  if(process.env.APPIUM_AUTOMATION == "Selendroid"){
+    return this.waitForElementByLinkText(text, timeout);
+  } else {
+    return this.waitForElementByName(text, timeout);
+  }
+}
+ wd.addPromiseChainMethod('waitByLinkOrName', waitByLinkOrName);
+
 describe("Unity Ads Example test " + platform + " Native", function () {
   this.timeout(450000);
   var driver;
@@ -40,16 +49,16 @@ describe("Unity Ads Example test " + platform + " Native", function () {
   context("options", function () {
     it("displays the button and clicks it", function () {
       return driver
-        .waitForElementByName("?", 25000)
+        .waitByLinkOrName("?", 25000)
         .click();
     })
     it("displays the developer ID tag", function () {
       return driver
-        .waitForElementByName("Developer ID", 25000);
+        .waitByLinkOrName("Developer ID", 25000);
     })
     it("shows button to open info and clicks", function () {
       return driver
-        .waitForElementByName("Start", 25000)
+        .waitByLinkOrName("Start", 25000)
         .click();
     });
   });
