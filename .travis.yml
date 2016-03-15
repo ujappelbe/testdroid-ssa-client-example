@@ -14,7 +14,7 @@ env:
 install:
   - git clone https://github.com/Applifier/unity-ads unity-ads
   - (cd unity-ads/android/example ; gradle build)
-  - git clone https://github.com/uJappelbe/testdroid-ssa-client
+  - git clone https://github.com/Applifier/testdroid-ssa-client
 script:
   - (cd testdroid-ssa-client ; eval $CMD_TD_RUN_EXAMPLE)
 sudo: false
