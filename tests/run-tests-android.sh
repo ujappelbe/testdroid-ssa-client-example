@@ -46,7 +46,7 @@ else
 fi
 
 if [ "$TESTDROID" -eq "1" ]; then
-  npm install chai@2.1.2 colors underscore chai-as-promised wd path mkdirp yiewd tail mocha-junit-reporter mocha 2>&1
+  sudo -n npm install chai@2.1.2 colors underscore chai-as-promised wd path mkdirp yiewd tail mocha-junit-reporter mocha 2>&1
   ./node_modules/.bin/mocha example.js --reporter mocha-junit-reporter --reporter-options mochaFile=./TEST-all.xml 2>&1
 else
   npm install chai@2.1.2 colors underscore chai-as-promised wd path mkdirp yiewd tail mocha-junit-reporter mocha

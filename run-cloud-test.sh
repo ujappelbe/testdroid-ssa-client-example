@@ -11,11 +11,28 @@ TD_API_TOKEN=$2
 TD_PROJECT_NAME=$3
 TEST_APP='example-debug.apk'
 TD_RUN_NAME="td-ssa-examples test run"
-
+FAILURES=0
 
 function usage {
   echo -e "Usage:\n\t$0 <DEVICE_GROUP_ID> <API_KEY> <TD_PROJECT_NAME>"
   exit 1
+}
+
+function fail_step {
+  echo "Failed step '$1'"
+  FAILURES=$((FAILURES + 1))
+}
+
+function check_file_exist_and_not_empty {
+  echo "Checking for file $1"
+  if [ -f "$1" ]; then
+    file_size=$(cat "$1" |wc -c |tr -d '[[:space:]]') #not a useless cat!
+    if [ "$file_size" -lt 1 ]; then
+      fail_step "File '$1' should size should be > 0"
+    fi
+  else
+    fail_step "File '$1' should exist but does not"
+  fi
 }
 
 if [ -z "${DEVICE_GROUP_ID}" ]; then usage ; fi
@@ -38,25 +55,8 @@ echo "Using device group with id='${DEVICE_GROUP_ID:?}'"
                          -z ../tests/ \
                          -d "$DEVICE_GROUP_ID" \
                          -c SINGLE
-) || ( echo "Failed to run test" ; exit 3 )
+) || fail_step "Run tests successfully"
 
-FAILURES=0
-function fail_step {
-  echo "Failed step '$1'"
-  FAILURES=$((FAILURES + 1))
-}
-
-function check_file_exist_and_not_empty {
-  echo "Checking for file $1"
-  if [ -f "$1" ]; then
-    file_size=$(cat "$1" |wc -c |tr -d '[[:space:]]') #not a useless cat!
-    if [ "$file_size" -lt 1 ]; then
-      fail_step "File '$1' should size should be > 0"
-    fi
-  else
-    fail_step "File '$1' should exist but does not"
-  fi
-}
 
 ###################
 ## Check results ##
