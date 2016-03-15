@@ -10,16 +10,6 @@ git clone https://github.com/ujappelbe/testdroid-ssa-client-example.git
 cd testdroid-ssa-client-example/
 ```
 
-Clone the repository containing example test application
-```
-git clone https://github.com/Applifier/unity-ads unity-ads
-```
-
-Build the test application (requires android SDK and gradle)
-```
-(cd unity-ads/android/example ; gradle build)
-```
-
 Clone the testdroid-ssa-client
 ```
 git clone https://github.com/uJappelbe/testdroid-ssa-client
@@ -35,7 +25,7 @@ cd testdroid-ssa-client
 
 Run test on server side appium (Place your testdroid API-key and project name in place of placeholders)
 ```
-TD_BUILD="../unity-ads/android/example/build/outputs/apk/example-debug.apk"
+TD_BUILD="../example-debug.apk"
 ./testdroid_cmdline.sh -u $TD_API_TOKEN -t "$TD_PROJECT" -a "$TD_BUILD" -r "My first SSA test" -z ../tests/ -d $TD_DEVICE_GROUP_ID
 ```
 Client should now start running test on testdroid cloud.
@@ -67,3 +57,10 @@ cd tests
 
 ## Travis integration
 Check .travis.yml for travis integration.
+
+## Using for testing cloud
+Use the `run-cloud-test.sh` script:
+```
+Usage:
+	./run-cloud-test.sh <DEVICE_GROUP_ID> <API_KEY> <TD_PROJECT_NAME>
+```
